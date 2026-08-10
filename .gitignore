@@ -1,4 +1,15 @@
 .vs
 data
 env
+!env/.env.example
 retail_rag_venv
+volumes/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+*.log
+.idea/
+.vscode/

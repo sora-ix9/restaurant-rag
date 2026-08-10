@@ -1,2 +1,11 @@
 pymilvus==2.6.9
 openai==2.20.0
+fastapi==0.135.2
+uvicorn==0.42.0
+psycopg2-binary==2.9.12
+elasticsearch==9.4.1
+pydantic-settings==2.7.1
+python-dotenv==1.0.1
+httpx==0.28.1
+pypdf
+tiktoken==0.13.0
