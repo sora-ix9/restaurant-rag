@@ -14,23 +14,50 @@ logger = logging.getLogger(__name__)
 MAX_EMBED_TOKENS = 8191
 EMBED_ENCODING = "cl100k_base"
 
+# SYSTEM_PROMPT = """\
+# You are a retail intelligence assistant. Answer the user's question using only the
+# contextual passage snippets provided. If the context does not contain enough
+# information to answer, say so explicitly instead of guessing."""
+
+# USER_PROMPT_TEMPLATE = """\
+# Use the following pieces of information enclosed in <context> tags to provide an
+# answer to the question enclosed in <question> tags.
+
+# <context>
+# {context}
+# </context>
+
+# <question>
+# {question}
+# </question>"""
+
 SYSTEM_PROMPT = """\
-You are a retail intelligence assistant. Answer the user's question using only the
-contextual passage snippets provided. If the context does not contain enough
-information to answer, say so explicitly instead of guessing."""
+You are a restaurant operations analyst. You get one customer review plus similar
+past reviews from this restaurant's corpus.
+
+Ground every claim. Sentiment and issues come from the new review. Any claim that
+an issue is recurring must cite a retrieved review; if none support it, say the
+corpus doesn't show it. Never invent facts about staffing, suppliers, or prices.
+If retrieved reviews are unrelated, say so and assess the review alone.
+
+Reply in the review's language. Be brief — an operator reads this."""
 
 USER_PROMPT_TEMPLATE = """\
-Use the following pieces of information enclosed in <context> tags to provide an
-answer to the question enclosed in <question> tags.
-
-<context>
+<past_reviews>
 {context}
-</context>
+</past_reviews>
 
-<question>
+<review>
 {question}
-</question>"""
+</review>
 
+Assess in exactly these 5 lines:
+
+1. Sentiment: positive/negative/mixed/neutral + confidence 0-1 + the phrase driving it
+2. Issues: bullets, each tagged [taste|portion|freshness|service|wait|price|cleanliness|ambience]. "none" if none
+3. Precedent: per issue — recurring / one case / not in corpus, + source id
+4. Actions: if negative/mixed, 2-3 fixes tied to issue numbers. Tag guesses "verify:". If positive, what to protect
+5. Priority: high/med/low + one clause. High = food safety or repeated failure"""
 
 @lru_cache(maxsize=1)
 def get_client() -> OpenAI:

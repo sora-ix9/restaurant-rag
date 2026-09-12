@@ -28,7 +28,8 @@ class Settings(BaseSettings):
     # OpenAI
     openai_api_key: str = ""
     embedding_model: str = "text-embedding-3-small"
-    llm_model: str = "gpt-4o"
+    # llm_model: str = "gpt-4o"
+    llm_model: str = "gpt-5-nano"
 
     # Qwen (DashScope OpenAI-compatible API). Used when llm_provider == "qwen".
     # The base URL is region-specific, so it is supplied via env, not hard-coded.
