@@ -21,3 +21,6 @@ class QueryResponse(BaseModel):
 
     answer: str
     sources: list[SourceDocument]
+    # The name that resolved, never the requested None — that is what makes
+    # D11's resolution observable from outside (D12).
+    prompt_set: str

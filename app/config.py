@@ -40,6 +40,12 @@ class Settings(BaseSettings):
     # Which generation backend to use: "openai" (GPT-4o) or "qwen" (Qwen 3.x Max).
     llm_provider: Literal["openai", "qwen"] = "openai"
 
+    # Which named prompt set generation uses. See app/services/prompts.py.
+    # A real default, not an empty one: D8's empty defaults name the deployment
+    # (which corpus, which region); a prompt set names behaviour, and a fresh
+    # clone should answer questions rather than raise KeyError("").
+    prompt_set: str = "default"
+
     # Milvus. The database and collection name whichever corpus is currently
     # loaded, so they are supplied via env/.env rather than defaulted here.
     milvus_uri: str = "http://localhost:19530"

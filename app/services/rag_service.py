@@ -31,17 +31,34 @@ def _get_llm_provider(provider: Literal["openai", "qwen"] | None = None):
 
 
 def answer_query(
-    question: str, top_k: int | None = None, provider: Literal["openai", "qwen"] | None = None
+    question: str,
+    top_k: int | None = None,
+    provider: Literal["openai", "qwen"] | None = None,
+    prompt: str | None = None,
 ) -> dict:
     """Run the retrieval-augmented generation pipeline for one question."""
 
     documents = milvus_service.search(question, top_k=top_k)
     logger.info("Retrieved %d documents for query: %s", len(documents), question)
 
+    # Resolve once, here, and pass the name down. Resolving inside
+    # build_messages as well is harmless, but two resolution points is how the
+    # two drift apart later (D11).
+    resolved_prompt = prompt or settings.prompt_set
+
     if not documents:
-        return {"answer": NO_CONTEXT_ANSWER, "sources": []}
+        # No provider is chosen on this path, so no set is actually *used* —
+        # reporting the configured default is the honest answer to "which would
+        # have run", and keeps QueryResponse one shape (D4, D12).
+        return {
+            "answer": NO_CONTEXT_ANSWER,
+            "sources": [],
+            "prompt_set": resolved_prompt,
+        }
 
     llm = _get_llm_provider(provider)
-    answer = llm.generate_answer(question, build_context(documents))
+    answer = llm.generate_answer(
+        question, build_context(documents), prompt=resolved_prompt
+    )
 
-    return {"answer": answer, "sources": documents}
+    return {"answer": answer, "sources": documents, "prompt_set": resolved_prompt}
