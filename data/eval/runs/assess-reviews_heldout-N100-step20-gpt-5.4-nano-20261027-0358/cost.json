@@ -1,0 +1,48 @@
+{
+  "generation": {
+    "projected_usd": 0.04027225,
+    "actual_usd": null,
+    "actual_source": "reconcile against the OpenAI usage dashboard (C8)"
+  },
+  "embeddings": {
+    "projected_usd": 0.0008595399999999997,
+    "actual_usd": null,
+    "actual_source": "reconcile against the OpenAI usage dashboard (C8)"
+  },
+  "judge_full": {
+    "projected_usd": 2.1245700000000003,
+    "actual_usd": 1.2912770500000001,
+    "actual_tokens": {
+      "in": 3162729,
+      "out": 526985
+    },
+    "actual_source": "ragas get_token_usage_for_openai (completion tokens include reasoning)",
+    "points": [
+      20,
+      40,
+      60,
+      80,
+      100
+    ]
+  },
+  "judge_extractive": {
+    "projected_usd": 2.0811564,
+    "actual_usd": 0.5061758,
+    "actual_tokens": {
+      "in": 1231554,
+      "out": 207892
+    },
+    "actual_source": "ragas get_token_usage_for_openai (completion tokens include reasoning)",
+    "points": [
+      20,
+      40,
+      60,
+      80,
+      100
+    ]
+  },
+  "budget_usd": 4.5,
+  "charged_usd": 4.24685819,
+  "thb_per_usd": 33.4,
+  "note": "projections count visible tokens only"
+}
