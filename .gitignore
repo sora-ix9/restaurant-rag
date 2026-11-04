@@ -14,7 +14,7 @@ data/eval/runs/*/*
 !data/eval/runs/*/dropped.json
 env
 !env/.env.example
-retail_rag_venv
+restaurant_rag_venv
 volumes/
 __pycache__/
 *.pyc
