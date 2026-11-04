@@ -1,7 +1,7 @@
 # Evaluation sets
 
 Evaluation inputs and run records for the Wongnai review corpus
-(`retail_db/wongnai_review_coll`, 40,000 rows).
+(`restaurant_db/wongnai_review_coll`, 40,000 rows).
 
 | File | What | Recoverable from |
 |---|---|---|
