@@ -4,7 +4,7 @@ Usage:
     python -m scripts.ingest
     python -m scripts.ingest --pattern "./data/**/*.md" --keep-existing
     python -m scripts.ingest --pattern "./data/reviews.csv" \\
-        --database retail_db --collection reviews \\
+        --database restaurant_db --collection reviews \\
         --columns review,rating --meta-columns rating --limit 500
 """
 import argparse

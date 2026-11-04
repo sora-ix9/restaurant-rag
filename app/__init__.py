@@ -1,1 +1,1 @@
-"""Retail RAG FastAPI Application."""
+"""Restaurant RAG FastAPI Application."""
