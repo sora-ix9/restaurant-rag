@@ -5,13 +5,13 @@ import pytest
 
 from app.services.prompts import PROMPT_SETS, PromptSet, build_messages
 
-# D7's system prompt, transcribed from the design doc's D7 block
-# (docs/part_1/mini_design-foundation_rag_baseline.md), NOT copied from
+# D7's system prompt, transcribed from the rename ADR's current wording
+# (docs/part_1/2-rename-retail-to-restaurant/adr-rename_retail_to_restaurant.md), NOT copied from
 # prompts.py. That is the whole point of N2: `default` is the control in every
 # comparison, so the pin must come from the specification. Pinning whatever the
 # code happens to hold would bless a typo as the baseline (Risk 11).
 D7_SYSTEM_PROMPT = """\
-You are a retail intelligence assistant. Answer the user's question using only the
+You are a restaurant intelligence assistant. Answer the user's question using only the
 contextual passage snippets provided. If the context does not contain enough
 information to answer, say so explicitly instead of guessing."""
 
@@ -146,7 +146,7 @@ def test_assess_is_the_analyst_prompt_that_generated_the_saved_responses():
 def test_both_providers_send_the_same_system_message(monkeypatch):
     """The only test that can catch drift 1 reopening.
 
-    Expected red before Step 2 is a TWO-DOCUMENT diff — "retail intelligence
+    Expected red before Step 2 is a TWO-DOCUMENT diff — "restaurant intelligence
     assistant" versus "restaurant operations analyst". A short diff (a stray
     newline) means someone partially closed the drift by pasting text between
     files, which is the failure mode C1 warns against.

@@ -5,7 +5,7 @@ from typing import Literal
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# Project root: app/config.py -> app/ -> retail_rag/
+# Project root: app/config.py -> app/ -> restaurant-rag/
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load env vars so the OpenAI SDK picks up OPENAI_API_KEY from its default lookup.
@@ -21,7 +21,7 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    app_name: str = "Retail RAG API"
+    app_name: str = "Restaurant RAG API"
     app_version: str = "0.1.0"
     debug: bool = True
 

@@ -14,7 +14,7 @@ from app.config import settings
 #                byte-for-byte by tests/test_prompts.py. Changing it invalidates
 #                every prior measurement — add a new named set instead (Risk 11).
 SYSTEM_PROMPT = """\
-You are a retail intelligence assistant. Answer the user's question using only the
+You are a restaurant intelligence assistant. Answer the user's question using only the
 contextual passage snippets provided. If the context does not contain enough
 information to answer, say so explicitly instead of guessing."""
 
@@ -68,7 +68,7 @@ Assess in exactly these 5 lines:
 #                refusal clause strong enough? (Risk 8). Shares D7's user
 #                template — only the system half differs.
 STRICT_SYSTEM_PROMPT = """\
-You are a retail intelligence assistant. Answer only what the contextual passage
+You are a restaurant intelligence assistant. Answer only what the contextual passage
 snippets state. Quote the passage you relied on verbatim before answering from it.
 
 If the context does not state the answer, reply exactly "The context does not
@@ -82,7 +82,7 @@ answer."""
 #                degrade Thai answers on a Thai corpus? Needs its own template so
 #                the text around the tags is Thai too.
 THAI_SYSTEM_PROMPT = """\
-คุณเป็นผู้ช่วยวิเคราะห์ข้อมูลร้านค้า ตอบคำถามของผู้ใช้โดยอ้างอิงจากข้อความที่ให้มาเท่านั้น
+คุณเป็นผู้ช่วยวิเคราะห์ข้อมูลร้านอาหาร ตอบคำถามของผู้ใช้โดยอ้างอิงจากข้อความที่ให้มาเท่านั้น
 หากข้อมูลที่ให้มาไม่เพียงพอต่อการตอบ ให้บอกตรง ๆ ว่าไม่พบข้อมูล อย่าเดาหรือแต่งขึ้นเอง
 
 ตอบเป็นภาษาเดียวกับคำถาม"""

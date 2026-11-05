@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class QueryRequest(BaseModel):
-    """A natural-language question against the retail knowledge base."""
+    """A natural-language question against the restaurant knowledge base."""
 
     question: str = Field(..., min_length=1, description="The user's question.")
     top_k: int | None = Field(
