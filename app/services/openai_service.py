@@ -6,6 +6,7 @@ import tiktoken
 from openai import OpenAI
 
 from app.config import settings
+from app.services.prompts import build_messages
 
 logger = logging.getLogger(__name__)
 
@@ -13,23 +14,6 @@ logger = logging.getLogger(__name__)
 # which would discard the whole batch it was sent in — so truncate instead.
 MAX_EMBED_TOKENS = 8191
 EMBED_ENCODING = "cl100k_base"
-
-SYSTEM_PROMPT = """\
-You are a retail intelligence assistant. Answer the user's question using only the
-contextual passage snippets provided. If the context does not contain enough
-information to answer, say so explicitly instead of guessing."""
-
-USER_PROMPT_TEMPLATE = """\
-Use the following pieces of information enclosed in <context> tags to provide an
-answer to the question enclosed in <question> tags.
-
-<context>
-{context}
-</context>
-
-<question>
-{question}
-</question>"""
 
 
 @lru_cache(maxsize=1)
@@ -88,21 +72,18 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
     return [item.embedding for item in sorted(response.data, key=lambda d: d.index)]
 
 
-def generate_answer(question: str, context: str) -> str:
-    """Generate an answer grounded in the retrieved context."""
+def generate_answer(question: str, context: str, prompt: str | None = None) -> str:
+    """Generate an answer grounded in the retrieved context.
+
+    Args:
+        question: The user's question.
+        context: Retrieved document chunks joined together.
+        prompt: Named prompt set. Falls back to `settings.prompt_set` (D11).
+    """
 
     response = get_client().chat.completions.create(
         model=settings.llm_model,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {
-                "role": "user",
-                "content": USER_PROMPT_TEMPLATE.format(
-                    context=context,
-                    question=question,
-                ),
-            },
-        ],
+        messages=build_messages(question, context, prompt),
     )
 
     return (response.choices[0].message.content or "").strip()

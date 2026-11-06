@@ -15,8 +15,14 @@ class QwenService:
     """Service for generating answers using Qwen models via DashScope API."""
 
     def __init__(self):
-        self.api_key = os.getenv("DASHSCOPE_API_KEY")
-        self.base_url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+        # Settings first, env as fallback — both are documented in .env.example,
+        # and before this they had no effect at all (drift 2). Keeping os.getenv
+        # means nobody's working DASHSCOPE_API_KEY setup breaks.
+        self.api_key = settings.qwen_api_key or os.getenv("DASHSCOPE_API_KEY")
+        self.base_url = (
+            settings.qwen_base_url
+            or "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+        )
         self.model = settings.qwen_model
         self.client: Optional[httpx.Client] = None
 
@@ -38,12 +44,13 @@ class QwenService:
             )
         return self.client
 
-    def generate_answer(self, question: str, context: str) -> str:
+    def generate_answer(self, question: str, context: str, prompt: str | None = None) -> str:
         """Generate a grounded answer using Qwen model.
 
         Args:
             question: User's question
             context: Retrieved document chunks joined together
+            prompt: Named prompt set. Falls back to `settings.prompt_set` (D11).
 
         Returns:
             Generated answer text
@@ -55,7 +62,7 @@ class QwenService:
         if not self.api_key:
             raise ValueError("DASHSCOPE_API_KEY not set in environment variables")
 
-        messages = build_messages(question, context)
+        messages = build_messages(question, context, prompt)
 
         payload = {
             "model": self.model,

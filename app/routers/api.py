@@ -25,7 +25,10 @@ async def query(request: QueryRequest) -> QueryResponse:
 
     try:
         result = rag_service.answer_query(
-            request.question, top_k=request.top_k, provider=request.provider
+            request.question,
+            top_k=request.top_k,
+            provider=request.provider,
+            prompt=request.prompt,
         )
     except Exception as exc:
         logger.exception("Query failed: %s", request.question)

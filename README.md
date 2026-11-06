@@ -1,6 +1,6 @@
-# Retail RAG API
+# Restaurant RAG API
 
-An **Agentic Hybrid Retail Intelligence System** built with FastAPI, Milvus, and OpenAI. It answers retail-domain questions with Retrieval-Augmented Generation over a Milvus vector store, with a pluggable LLM provider (GPT-4o or Qwen) and a multi-format ingestion pipeline.
+An **Agentic Hybrid Restaurant Intelligence System** built with FastAPI, Milvus, and OpenAI. It answers restaurant-domain questions with Retrieval-Augmented Generation over a Milvus vector store, with a pluggable LLM provider (GPT-4o or Qwen) and a multi-format ingestion pipeline.
 
 ## Architecture
 
@@ -115,7 +115,7 @@ LLM_PROVIDER=openai
 
 # Milvus target
 MILVUS_URI=http://localhost:19530
-MILVUS_DATABASE=retail_db
+MILVUS_DATABASE=restaurant_db
 MILVUS_COLLECTION=wongnai_review_coll
 ```
 
@@ -169,7 +169,7 @@ python -m scripts.ingest --pattern "./data/faq/*.md" --collection faq_docs
 # Headerless semicolon CSV; rating stored but kept out of the vector
 python -m scripts.ingest \
   --pattern "./data/reviews.csv" \
-  --database retail_db --collection reviews \
+  --database restaurant_db --collection reviews \
   --columns review,rating --meta-columns rating
 ```
 

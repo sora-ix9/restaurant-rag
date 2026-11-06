@@ -1,8 +1,20 @@
 .vs
-data
+data/*
+!data/eval/
+data/eval/*
+!data/eval/README.md
+!data/eval/reviews_heldout_sample.jsonl
+!data/eval/runs/
+data/eval/runs/*
+!data/eval/runs/*/
+data/eval/runs/*/*
+!data/eval/runs/*/run_meta.json
+!data/eval/runs/*/sweep.csv
+!data/eval/runs/*/cost.json
+!data/eval/runs/*/dropped.json
 env
 !env/.env.example
-retail_rag_venv
+restaurant_rag_venv
 volumes/
 __pycache__/
 *.pyc
@@ -13,3 +25,4 @@ __pycache__/
 *.log
 .idea/
 .vscode/
+docs/prompts.txt

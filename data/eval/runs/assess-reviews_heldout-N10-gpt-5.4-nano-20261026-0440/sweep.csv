@@ -1,0 +1,2 @@
+n,seconds,cost_usd,cumulative_usd,llm_context_precision_without_reference,llm_context_precision_without_reference__std,faithfulness_full,faithfulness_full__std,faithfulness_extractive,faithfulness_extractive__std,n_extractive_count
+10,215.11986059998162,0.14023960000000002,0.1444061,0.5311111110774074,0.4264698619883112,0.26657509157509157,0.21325809645249622,0.5430639097744361,0.1713252628212114,10

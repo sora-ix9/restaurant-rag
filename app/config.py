@@ -5,7 +5,7 @@ from typing import Literal
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# Project root: app/config.py -> app/ -> retail_rag/
+# Project root: app/config.py -> app/ -> restaurant-rag/
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load env vars so the OpenAI SDK picks up OPENAI_API_KEY from its default lookup.
@@ -21,14 +21,15 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    app_name: str = "Retail RAG API"
+    app_name: str = "Restaurant RAG API"
     app_version: str = "0.1.0"
     debug: bool = True
 
     # OpenAI
     openai_api_key: str = ""
     embedding_model: str = "text-embedding-3-small"
-    llm_model: str = "gpt-4o"
+    # llm_model: str = "gpt-4o"
+    llm_model: str = "gpt-5-nano"
 
     # Qwen (DashScope OpenAI-compatible API). Used when llm_provider == "qwen".
     # The base URL is region-specific, so it is supplied via env, not hard-coded.
@@ -38,6 +39,12 @@ class Settings(BaseSettings):
 
     # Which generation backend to use: "openai" (GPT-4o) or "qwen" (Qwen 3.x Max).
     llm_provider: Literal["openai", "qwen"] = "openai"
+
+    # Which named prompt set generation uses. See app/services/prompts.py.
+    # A real default, not an empty one: D8's empty defaults name the deployment
+    # (which corpus, which region); a prompt set names behaviour, and a fresh
+    # clone should answer questions rather than raise KeyError("").
+    prompt_set: str = "default"
 
     # Milvus. The database and collection name whichever corpus is currently
     # loaded, so they are supplied via env/.env rather than defaulted here.
