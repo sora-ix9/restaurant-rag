@@ -1,0 +1,150 @@
+{
+  "common_params": {
+    "run_slug": "index-types-full-20261105-1108",
+    "run_mode": "full",
+    "git_sha": "9d43c50",
+    "source": "restaurant_db/wongnai_review_coll",
+    "n_rows": 40000,
+    "dim": 1536,
+    "data_sha": "cd266435ee85",
+    "metric_type": "IP",
+    "embedding_model": "text-embedding-3-small",
+    "consistency_level": "Bounded",
+    "query_set": "test_file.csv",
+    "heldout_sha": "05c533e7c943",
+    "sample_seed": 20261019,
+    "n_recall_queries": 6195,
+    "n_timing_queries": 1000,
+    "top_k": 5,
+    "recall_targets": "[0.7, 0.8, 0.9, 0.95]",
+    "milvus_version": "2.5.10",
+    "pymilvus_version": "2.6.9",
+    "build_repeats": 3,
+    "latency_repeats": 2,
+    "memory_cycles": 3,
+    "concurrency": "[1, 4, 8]",
+    "qps_seconds": 15
+  },
+  "date_utc": "20261105-1108",
+  "select_concurrency": 4,
+  "configs": [
+    {
+      "name": "FLAT",
+      "index_type": "FLAT",
+      "build": {},
+      "search_param": null,
+      "search_values": [
+        null
+      ]
+    },
+    {
+      "name": "AUTOINDEX",
+      "index_type": "AUTOINDEX",
+      "build": {},
+      "search_param": null,
+      "search_values": [
+        null
+      ]
+    },
+    {
+      "name": "HNSW-M16-efc200",
+      "index_type": "HNSW",
+      "build": {
+        "M": 16,
+        "efConstruction": 200
+      },
+      "search_param": "ef",
+      "search_values": [
+        10,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512
+      ]
+    },
+    {
+      "name": "IVF_FLAT-nlist800",
+      "index_type": "IVF_FLAT",
+      "build": {
+        "nlist": 800
+      },
+      "search_param": "nprobe",
+      "search_values": [
+        1,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256
+      ]
+    },
+    {
+      "name": "IVF_PQ-nlist800-m96",
+      "index_type": "IVF_PQ",
+      "build": {
+        "nlist": 800,
+        "m": 96,
+        "nbits": 8
+      },
+      "search_param": "nprobe",
+      "search_values": [
+        1,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256
+      ]
+    },
+    {
+      "name": "IVF_PQ-nlist800-m192",
+      "index_type": "IVF_PQ",
+      "build": {
+        "nlist": 800,
+        "m": 192,
+        "nbits": 8
+      },
+      "search_param": "nprobe",
+      "search_values": [
+        1,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256
+      ]
+    }
+  ],
+  "deployed_index": {
+    "vector": {
+      "index_type": "AUTOINDEX",
+      "metric_type": "IP",
+      "field_name": "vector",
+      "index_name": "vector",
+      "total_rows": 40000,
+      "indexed_rows": 40000,
+      "pending_index_rows": 0,
+      "state": "Finished"
+    }
+  },
+  "embedding_cost_usd": 0.0,
+  "segments_after_compaction": [
+    2
+  ],
+  "other_containers_running": [],
+  "docker_memory_limit_mb": 15749.12,
+  "machine": {
+    "processor": "Intel64 Family 6 Model 126 Stepping 5, GenuineIntel",
+    "logical_cpus": 8,
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.9"
+  }
+}
