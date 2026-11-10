@@ -1,0 +1,32 @@
+{
+  "run_slug": "assess-reviews_heldout-N10-gpt-5.4-nano-20261026-0440",
+  "date_utc": "20261026-0440",
+  "git_sha": "50dcf5a",
+  "judge_model": "gpt-5.4-nano",
+  "judge_model_status": "Deprecated per OpenAI model page, 2026-10-19",
+  "judge_temperature": 1,
+  "generator_model": "gpt-5-nano",
+  "prompt_set": "assess",
+  "eval_set": "reviews_heldout",
+  "eval_file": "data\\eval\\reviews_heldout_sample.jsonl",
+  "eval_set_sha": "a023765acc0a",
+  "sample_seed": 20261019,
+  "ragas_version": "0.4.3",
+  "top_k": 5,
+  "n_max": 10,
+  "completed_n": [
+    10
+  ],
+  "stopped_before_n": null,
+  "n_extractive": 10,
+  "dropped_ids": [],
+  "self_retrieval_ids": [],
+  "max_top1_score": 0.777874231338501,
+  "sentiment_mix": {
+    "mixed": 3,
+    "positive": 2,
+    "unparsed": 4,
+    "negative": 1
+  },
+  "resumed_from": null
+}
