@@ -1,6 +1,6 @@
-# Restaurant RAG API
+# RAG for Restaurant Review Assessment
 
-An **Agentic Hybrid Restaurant Intelligence System** built with FastAPI, Milvus, and OpenAI. It answers restaurant-domain questions with Retrieval-Augmented Generation over a Milvus vector store, with a pluggable LLM provider (GPT-4o or Qwen) and a multi-format ingestion pipeline.
+An **RAG for Restaurant Review Assessment** built with FastAPI, Milvus, and OpenAI. It answers restaurant-domain questions with Retrieval-Augmented Generation over a Milvus vector store, with a multi-format ingestion pipeline.
 
 ## Architecture
 
@@ -193,4 +193,3 @@ Loader tests run against temp files and need neither Milvus nor network access.
 
 - [Milvus Documentation](https://milvus.io/docs)
 - [FastAPI Documentation](https://fastapi.tiangolo.com)
-- [Wongnai Corpus](https://github.com/wongnai/wongnai-corpus)
