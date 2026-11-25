@@ -87,11 +87,11 @@ Assess the review, which is enclosed between <review> tags below, into the exact
 </instructions>
 
 <review>
-{question}
+{user_review}
 </review>
 
 <past_reviews>
-{context}
+{past_review}
 </past_reviews>
 """
 
