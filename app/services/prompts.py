@@ -47,21 +47,53 @@ If retrieved reviews are unrelated, say so and assess the review alone.
 Reply in the review's language. Be brief — an operator reads this."""
 
 ASSESS_USER_TEMPLATE = """\
-<past_reviews>
-{context}
-</past_reviews>
+<1st-shot example>
+Review: ร้านอยู่ในเมืองแม่ฮ่องสอน บรรยากาศเงียบสงบ วันธรรมดาคนไม่เยอะ มีดนตรีสด แขกส่วนใหญ่ที่เห็นจะเป็นฝรั่ง(วันธรรมดานะ) อากาศไม่ร้อน การบริการดี พนักงานแนะนำอาหารดีมาก มื้อนี้ทานกันเบาๆเพราะมา 2 คน ธรรมดาก็มาสองคนแต่สั่งเหมือนมา 4 คน เหลือทุกที ครั้งนี้เลยเตือนตัวเองสั่งแค่พอทานพอ 2 เมนู ยำผักกูดอาหารแนะนำของร้าน เราชอบมาก แต่แฟนเราไม่ชอบเลย ทางร้านทำออกมาแตกต่างจากร้านอื่นเหมือนใช้กระทิในการทาน มีพริกซอย มีกุนเชียงชิ้นเล็กๆ มีหมูสับ ทานรวมกันแล้วอร่อยมากค่ะ อีกเมนูจำชื่อเมนูไม่ได้เพราะนานแล้ว แต่เป็นเมนูที่ทางร้านแนะนำอีกเหมือนกัน อร่อยเนื้อปลาสดไม่เหม็นคาว ลองมาทานกันเนอะ แม่ฮ่องสอนร้านอาหารไม่ค่อยเยอะ หาไม่ยากค่ะ
+Result:
+1) Sentiment: positive; confidence 0.75; driving phrases: อร่อยมากค่ะ, บริการดีมาก  
+2) Issues: none  
+3) Precedent: none; corpus unrelated (ไม่พบรีวิวที่เกี่ยวข้องกับร้านนี้ในชุดข้อมูล)  
+4) Actions: รักษาคุณภาพอาหารและความสด; รักษาบริการและการต้อนรับให้ดี; คงบรรยากาศเงียบสงบและดนตรีสดให้ต่อไป  
+5) Priority: low (ไม่มีความเสี่ยงด้านความปลอดภัย เน้นรักษาคุณภาพอาหารและบริการ)
+</1st-shot example>
 
-<review>
-{question}
-</review>
+<2nd-shot example>
+Review: คือต้องบอกก่อนว่าเมนูที่สั่งวันนี้ไม่มีเนื้อแพงๆรวมอยู่ด้วย เลยไม่ขอรีวิวคุณภาพเนื้อของเค้าค่ะ เพราะในโต๊ะไม่กินเนื้อกันเลยสั่งเป็นเมนูธรรมดา เบอเกอร์หมู พาสต้า ซี่โครง ส่วนตัวรสชาติทั่วๆไป ทานได้ ไม่มีอันไหนอร่อยเป็นพิเศษ คิดว่าร้านดังมาก น่าจะเป็นที่คุณภาพเนื้อมากกว่าค่ะ
+Result:
+1) Sentiment: neutral; confidence 0.70; driving phrase: รสชาติทั่วๆไป ทานได้ ไม่มีอันไหนอร่อยเป็นพิเศษ
+2) Issues: [taste] เมนูที่ไม่ใช่เนื้อ (เบอร์เกอร์หมู พาสต้า ซี่โครง) รสชาติธรรมดา ไม่โดดเด่น
+3) Precedent: none; corpus unrelated (ไม่พบรีวิวที่เกี่ยวข้องกับร้านนี้ในชุดข้อมูล)  
+4) Actions: verify: ทดสอบและปรับปรุงรสชาติเมนูหมู/พาสต้า/ซี่โครงให้มีจุดเด่นมากขึ้น; verify: สื่อสารเมนูซิกเนเจอร์ของร้านให้ชัดเจนสำหรับลูกค้าที่ไม่ทานเนื้อ
+5) Priority: low (รสชาติอยู่ในระดับทานได้ ไม่มีปัญหาความปลอดภัยหรือข้อร้องเรียนรุนแรง)
+</2nd-shot example>
 
-Assess in exactly these 5 lines:
+<3rd-shot example>
+Review: เป็นร้านที่ที่บ้านพามากินบ่อยๆ กินมานานมากแล้ว รสชาติอาหาร และคุณภาพ รู้สึกว่าลดลงเรื่อยๆ พนักงานบริการไม่ค่อยดี ฟังไม่ค่อยรู้เรื่อง จดผิดจดถูก ขนมหวาน สั่งบัวลอยเผือกมาทำแบบไม่ตั้งใจ เหมือนเอาแช่แข็งไว้แล้วแค่ไปอุ่นร้อน ตอนเสิร์ฟเหมือนไม่ได้เช็คว่ามันโอเครึยัง พอกินเข้าไปเย็นและแข็งอย่างกับก้อนหิน ปรับปรุงด่วนค่าาาา!!!
+Result:
+1) Sentiment: negative; confidence 0.75; driving phrase: รสชาติและคุณภาพลดลงเรื่อยๆ และบริการไม่ค่อยดี
+2) Issues: [taste] รสชาติ/คุณภาพอาหารลดลง; [service] พนักงานบริการไม่ค่อยดี/จดผิด; [freshness] ของหวาน/อาหารบางจานเย็น/แข็ง เหมือนถูกแช่แข็ง
+3) Precedent: [taste] past_review at the indices 3 and 4; [service] past_review at the indices 0 and 2; [freshness] past_review at the index 2
+4) Actions: verify: ฝึกอบรมพนักงาน, ยืนยันออเดอร์กับลูกค้าก่อนเสิร์ฟ, ตรวจสอบคำสั่งทุกครั้ง; verify: มาตรฐานสูตรอาหาร ควบคุมส่วนและรสชาติ, ตรวจอุณหภูมิอาหารก่อนเสิร์ฟ; verify: ควบคุมการเก็บรักษา/ละลาย/อุ่นร้อน, บันทึกอุณหภูมิวัสดุอาหาร
+5) Priority: high (เนื่องจากปัญหาซ้ำซากด้านบริการ/รสชาติและคุณภาพส่งผลกระทบประสบการณ์ลูกค้า)
+</3rd-shot example>
 
-1. Sentiment: positive/negative/mixed/neutral + confidence 0-1 + the phrase driving it
+<instructions>
+Assess the review, which is enclosed between <review> tags below, into the exact following 5 lines, where the text enclosed by the <past_reviews> tags is past review(s) for context that is retrieved from database:
+1. Sentiment: positive/negative/mixed/neutral + confidence 0.0-1.0 + the phrase driving it
 2. Issues: bullets, each tagged [taste|portion|freshness|service|wait|price|cleanliness|ambience]. "none" if none
 3. Precedent: per issue — recurring / one case / not in corpus, + source id
 4. Actions: if negative/mixed, 2-3 fixes tied to issue numbers. Tag guesses "verify:". If positive, what to protect
-5. Priority: high/med/low + one clause. High = food safety or repeated failure"""
+5. Priority: high/medium/low + one clause. High = food safety or repeated failure
+</instructions>
+
+<review>
+{user_review}
+</review>
+
+<past_reviews>
+{past_review}
+</past_reviews>
+"""
 
 # ── strict ──── Refusal made mandatory rather than merely encouraged, and the
 #                passage relied on must be quoted. Exists to answer: is D7's
